@@ -16,7 +16,7 @@ This script switches all windows from one monitor to another in current workspac
 
 8) Last step and most important, have fun.
 
-## This script was tested the following environment
+## This script was tested in the following environment
 
 1) Debian 9.8
 2) Two 1920 x 1080 monitors (one DELL and the other is LG)
