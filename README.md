@@ -1,5 +1,5 @@
 # dual-monitor-window-switch
-A script do switch windows between monitors in current workspace.
+A script to switch windows between dual monitors in current workspace.
 
 ## What does it do ?   
 
