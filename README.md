@@ -13,7 +13,6 @@ This script switches all windows from one monitor to another in current workspac
 5) make executable: sudo chmod +x swap.sh
 6) run using: ./swap.sh
 7) I suggest you set a custom shortcut for easy activation.
-
 8) Last step and most important, have fun.
 
 ## This script was tested in the following environment
