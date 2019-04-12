@@ -1,9 +1,14 @@
 #!/bin/bash
  
 # screen width (the effective resolution! just set yours here.)
-screen_width1=1920
-screen_width2=1920
- 
+#Manual Older Way
+#screen_width1=1920
+#screen_width2=1920
+
+#Automatic get horizontal resolution (new way) 
+screen_width1=`xrandr | fgrep '*' | awk -F'[ \+x]' '{print $4}' | sed -n 1p`
+screen_width2=`xrandr | fgrep '*' | awk -F'[ \+x]' '{print $4}' | sed -n 2p`
+
 swap()
 {
     # get active window size and position
@@ -22,8 +27,15 @@ swap()
             wmctrl -ir $1 -b remove,maximized_vert,maximized_horz
         fi
     
-        wmctrl -ir $1 -e 0,$screen_width1,-1,-1,-1
-    
+        #if both screens sizes are the same position windows in left corner
+        if [ "$screen_width2" -eq "$screen_width1" ]; then
+            h_position=$(($screen_width1+$x))
+        else
+            h_position=$screen_width1
+        fi
+
+        wmctrl -ir $1 -e 0,$h_position,-1,-1,-1
+
         if $maximized; then
             wmctrl -ir $1 -b add,maximized_vert,maximized_horz
         fi
@@ -37,8 +49,15 @@ swap()
         if $maximized; then
             wmctrl -ir $1 -b remove,maximized_vert,maximized_horz
         fi
+
+        #if both screens sizes are the same position windows in left corner
+        if [ "$screen_width2" -eq "$screen_width1" ]; then
+            h_position=$(($x-$screen_width1))
+        else
+            h_position=0
+        fi
     
-        wmctrl -ir $1 -e 0,0,-1,-1,-1
+        wmctrl -ir $1 -e 0,$h_position,-1,-1,-1
     
         if $maximized; then
             wmctrl -ir $1 -b add,maximized_vert,maximized_horz
